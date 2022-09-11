@@ -5,6 +5,9 @@ DB_DSN ?= root:1@tcp(localhost:${DB_PORT})/${DB_NAME}
 start:
 	DB_DSN="${DB_DSN}" go run ./cmd
 
+test:
+	go test ./...
+
 db_run:
 	docker run -d --name ${DB_NAME} -e MYSQL_DATABASE=${DB_NAME} -e MYSQL_ROOT_PASSWORD=1 -e MYSQL_ROOT_HOST=172.17.0.1 -p ${DB_PORT}:3306 mysql:8.0.30
 db_start:

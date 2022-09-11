@@ -15,6 +15,7 @@ Adapters are the outermost layer of the architecture. Some adapters (for example
 ## Notes on architecture
 
 - In the original application, repositories were more like DAOs, returning ORM-specific JPA objects. I found that problematic because it made creating generic interfaces for these repositories impossible. I diverged from the original design by making repositories return domain objects instead and thus making it possible to have multiple implementations of the repository.
+- TIL: it's possible to automate application architecture tests. Original application used [ArchUnit](https://www.archunit.org/), Go tooling in that space looks immature but nevertheless it's an interesting concept. [I have included one example of such test](pkg/architecture_test.go).
 
 ## Notes on technology
 
