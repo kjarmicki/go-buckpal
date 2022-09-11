@@ -1,6 +1,7 @@
 # Go Buckpal
 
 This is mostly faithful Go port of [the application](https://github.com/thombergs/buckpal) accompanying [Tom Homberg's book Get Your Hands Dirty on Clean Architecture](https://reflectoring.io/book/).
+
 It was done purely for educational purposes and doesn't necessarily reflect how I'd write an actual production system.
 
 ## Use cases, ports and adapters in a nutshell
@@ -9,7 +10,7 @@ Use cases are interfaces, descriptions of what users can do with the system. The
 
 Ports are interfaces, they're also part of the application layer. They define the contract with the world outside of an application. Ports can point in (like request handling actions) or out (like persistence actions).
 
-Adapters are the outermost layer of the architecture. Input adapters call input ports to handle incoming traffic. Output adapters call output ports to handle outgoing traffic. Some adapters (for example, out/persistence adapters) are implementations of ports and others (for example, in/web) are not, they call port implementations instead.
+Adapters are the outermost layer of the architecture. Some adapters (for example, out/persistence adapters) are implementations of ports and others (for example, in/web) are not, they call port implementations instead. When they do not implement ports themselves, input adapters call input ports to handle incoming traffic, and output adapters call output ports to handle outgoing traffic.
 
 ## Notes on architecture
 
