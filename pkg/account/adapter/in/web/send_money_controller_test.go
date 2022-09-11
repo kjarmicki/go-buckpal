@@ -44,7 +44,7 @@ func TestSendMoneyController(t *testing.T) {
 		controller := account_adapter_in_web.NewSendMoneyController(sendMoneyUseCase)
 		router = mux.NewRouter()
 		controller.AttachToRouter(router)
-		sendMoneyUseCase.EXPECT().SendMoney(command).Return(true, nil).Times(1)
+		sendMoneyUseCase.EXPECT().SendMoney(gomock.Any(), command).Return(true, nil).Times(1)
 
 		req, _ := http.NewRequest(
 			http.MethodPost,

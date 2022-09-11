@@ -21,7 +21,7 @@ type ActivityWindowGormMySqlRepositoryData struct {
 	Amount          int64
 }
 
-func NewActivityWindowGormRepository(db *gorm.DB) *ActivityWindowGormMySqlRepository {
+func NewActivityWindowGormMysqlRepository(db *gorm.DB) *ActivityWindowGormMySqlRepository {
 	return &ActivityWindowGormMySqlRepository{
 		db: db,
 	}

@@ -20,7 +20,9 @@ func NewSendMoneyController(sendMoneyUseCase account_application_port_in.SendMon
 }
 
 func (smc *SendMoneyController) AttachToRouter(router *mux.Router) {
-	router.HandleFunc("/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}", smc.SendMoney)
+	router.
+		HandleFunc("/accounts/send/{sourceAccountId}/{targetAccountId}/{amount}", smc.SendMoney).
+		Methods("POST")
 }
 
 func (smc *SendMoneyController) SendMoney(rw http.ResponseWriter, r *http.Request) {
@@ -49,7 +51,7 @@ func (smc *SendMoneyController) SendMoney(rw http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	ok, err := smc.sendMoneyUseCase.SendMoney(sendMoneyCommand)
+	ok, err := smc.sendMoneyUseCase.SendMoney(r.Context(), sendMoneyCommand)
 	if err != nil || !ok {
 		rw.WriteHeader(http.StatusBadRequest)
 		return

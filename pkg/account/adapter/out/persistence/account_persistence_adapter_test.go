@@ -2,7 +2,6 @@ package account_adapter_out_persistence_test
 
 import (
 	"context"
-	seq "database/sql"
 	"errors"
 	"fmt"
 	"os"
@@ -169,13 +168,7 @@ func migrateTestDb() {
 }
 
 func connectToTestDb() *gorm.DB {
-	sq, err := seq.Open(dbEngine, dbDsn)
-	if err != nil {
-		panic(err)
-	}
-	db, err := gorm.Open(mysql.New(mysql.Config{
-		Conn: sq,
-	}))
+	db, err := gorm.Open(mysql.Open(dbDsn))
 	if err != nil {
 		panic(err)
 	}
@@ -203,7 +196,7 @@ func addSampleAccountWithActivity() {
 func TestAccountPersistenceAdapterLoadAccount(t *testing.T) {
 	clearDb()
 	addSampleAccountWithActivity()
-	activityRepository := account_adapter_out_persistence.NewActivityWindowGormRepository(db)
+	activityRepository := account_adapter_out_persistence.NewActivityWindowGormMysqlRepository(db)
 	accountRepository := account_adapter_out_persistence.NewAccountGormMySqlRepository(db, activityRepository)
 	adapter := account_adapter_out_persistence.NewAccountPersistenceAdapter(accountRepository, activityRepository)
 

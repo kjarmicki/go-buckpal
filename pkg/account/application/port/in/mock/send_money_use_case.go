@@ -5,6 +5,7 @@
 package mock_account_application_port_in
 
 import (
+	context "context"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
@@ -35,16 +36,16 @@ func (m *MockSendMoneyUseCase) EXPECT() *MockSendMoneyUseCaseMockRecorder {
 }
 
 // SendMoney mocks base method.
-func (m *MockSendMoneyUseCase) SendMoney(command *account_application_port_in.SendMoneyCommand) (bool, error) {
+func (m *MockSendMoneyUseCase) SendMoney(ctx context.Context, command *account_application_port_in.SendMoneyCommand) (bool, error) {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "SendMoney", command)
+	ret := m.ctrl.Call(m, "SendMoney", ctx, command)
 	ret0, _ := ret[0].(bool)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
 
 // SendMoney indicates an expected call of SendMoney.
-func (mr *MockSendMoneyUseCaseMockRecorder) SendMoney(command interface{}) *gomock.Call {
+func (mr *MockSendMoneyUseCaseMockRecorder) SendMoney(ctx, command interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMoney", reflect.TypeOf((*MockSendMoneyUseCase)(nil).SendMoney), command)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendMoney", reflect.TypeOf((*MockSendMoneyUseCase)(nil).SendMoney), ctx, command)
 }

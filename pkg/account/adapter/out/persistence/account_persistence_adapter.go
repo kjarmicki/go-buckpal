@@ -23,7 +23,7 @@ func (apa *AccountPersistenceAdapter) LoadAccount(ctx context.Context, accountId
 	return apa.accountRepository.FindById(ctx, accountId, baselineDate)
 }
 
-func (apa *AccountPersistenceAdapter) UpdateActivities(ctx context.Context, account account_domain.Account) error {
+func (apa *AccountPersistenceAdapter) UpdateActivities(ctx context.Context, account *account_domain.Account) error {
 	for _, activity := range account.GetActivities() {
 		if activity.Id == 0 {
 			err := apa.activityRepository.SaveActivity(ctx, activity)
